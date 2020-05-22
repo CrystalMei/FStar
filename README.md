@@ -9,7 +9,7 @@ Authors: Nikhil Swamy, Aseem Rastogi, Aymeric Fromherz, Denis Merigoux, Danel Ah
 This material contains the mechanized proofs for the model presented in the SteelCore paper.
 More precisely, we implement here a version of our effectul CSL semantics complete with monotonic state, non-determinism and pre- and post-conditions.
 
-### Installation
+### Installation (skip if using the VM)
 
 All the development is done within the F\* proof assistant, which relies on the Z3 theorem prover
 for semi-automated proofs.
@@ -36,8 +36,10 @@ $ opam depext -i conf-gmp
 
 5. Add FStar/bin and z3/bin to your PATH 
 
-6. You can now verify any file by calling fstar.exe Module.fst(i). You can verify the full development by calling `make -j 2`. Files are "checked" to avoid reverification if they have not been modified.
- To force reverification of all files, run `make clean && make`
+### Verification
+
+You can verify any file by calling fstar.exe Module.fst(i).
+You can verify the full development by calling `make -C ulib -B`.
 
 ### F\* overview
 
