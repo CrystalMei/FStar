@@ -14,3 +14,8 @@ verify-all: $(addsuffix .checked, $(addprefix $(CACHE_DIR)/, $(FSTAR_FILES)))
 # This takes forever to verify
 StlcCbvDbPntSubstLists:
 	$(FSTAR) StlcCbvDbPntSubstLists.fst --z3rlimit 20
+
+mkdir:
+	@mkdir -p ./Logs
+	@mkdir -p $(CACHE_DIR)
+all-time: clean mkdir verify-all

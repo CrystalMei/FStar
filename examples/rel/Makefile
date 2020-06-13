@@ -63,3 +63,53 @@ benton2004:\
 
 pack:
 	cd ../..; zip -r relational.zip examples/rel examples/dm4free
+
+all-time: mkdir\
+  benton2004-time\
+  Bijection.uver-time\
+  Equivalence.uver-time\
+  IfcComposeReify.uver-time\
+  IfcDeclassify.uver-time\
+  IfcDelimitedRelease.uver-time\
+  IfcDelimitedReleaseReify.uver-time\
+  IfcExample.uver-time\
+  IfcExampleReify0.uver-time\
+  IfcExampleReify1.uver-time\
+  IfcExampleReify2.uver-time\
+  IfcExampleReify3.uver-time\
+  IfcRecursiveReify.uver-time\
+  IfcReificationRegressionTest.uver-time\
+  IfcRules.uver-time\
+  IfcRulesReify.uver-time\
+  IfcTypechecker.uver-time\
+  Loops.uver-time\
+  Memo.uver-time\
+  NetKat.uver-time\
+  OneTimePad.uver-time\
+  Point.uver-time\
+  ProgramEquivalence.uver-time\
+  ProgramOptimizations.uver-time\
+  RandomTapes.uver-time\
+  Recursive.uver-time\
+  ReifyLong.uver-time\
+  Rel.uver-time\
+  StRel.uver-time\
+  Swap.uver-time\
+  UnionFind.Forest.uver-time\
+  UnionFind.uver-time\
+  UnionFind.Functions.uver-time\
+  While.uver-time\
+  WhileReify.uver-time \
+  OTP.uver-time \
+  ElGamal.uver-time
+
+benton2004-time:\
+  Benton2004.Aux.uver-time\
+  Benton2004.uver-time\
+  Benton2004.DDCC.uver-time\
+  Benton2004.DDCC.Examples.uver-time\
+  Benton2004.SmithVolpano.uver-time\
+  Benton2004.RHL.uver-time\
+  Benton2004.RHL.Examples.uver-time\
+  Benton2004.RHL.Derived.uver-time\
+  Benton2004.RHL.Examples2.uver-time\

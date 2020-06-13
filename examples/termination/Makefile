@@ -5,3 +5,4 @@ FSTAR_HOME=../..
 include ../Makefile.include
 
 all: $(addsuffix .uver, $(ALLFILES))
+all-time: mkdir $(addsuffix .uver-time, $(ALLFILES))

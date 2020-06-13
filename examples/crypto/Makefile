@@ -54,17 +54,24 @@ FSTAR_INCLUDE_PATHS=--include $(FSTAR_HOME)/ucontrib/Platform/fst --include $(FS
 	      --use_hints
 
 verify-%: __force__
-	$(FSTAR) $(FSTAR_INCLUDE_PATHS) \
-		 --z3rlimit 20 $*
+	@d=$$(date +%s) \
+	; $(FSTAR) $(FSTAR_INCLUDE_PATHS) \
+		 --z3rlimit 20 $*  --query_stats > Logs/$*.trace \
+	&& echo "$*,	$$(($$(date +%s)-d))"
 
 verify_hh-%: __force__
-	$(FSTAR) $(FSTAR_INCLUDE_PATHS) \
-		 --z3rlimit 20 $*
+	@d=$$(date +%s) \
+	; $(FSTAR) $(FSTAR_INCLUDE_PATHS) \
+		 --z3rlimit 20 $*  --query_stats > Logs/$*.trace \
+	&& echo "$*,	$$(($$(date +%s)-d))"
 
 all: uall
 	+$(MAKE) -f Makefile.oplss verify-all
 
 uall: $(VERFILES:%=verify-%) $(HH_VERFILES:%=verify_hh-%) RPC.ml CntProtocol.ml
+
+all-time: mkdir uall
+#	+$(MAKE) -f Makefile.oplss verify-all
 
 RPC.ml: SHA1.fst MAC.fst Formatting.fst RPC.fst
 	$(FSTAR_ALWAYS) --no_location_info --lax \

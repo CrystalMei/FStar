@@ -14,8 +14,10 @@ depend: .depend
 -include .depend
 
 %.checked:
-	$(FSTAR) $<
-	touch -c $@
+	@d=$$(date +%s) \
+	; $(FSTAR) --query_stats $< > Logs/$(basename $(notdir $@)).trace \
+	&& echo "$(basename $(notdir $@)),	$$(($$(date +%s)-d))" \
+	&& touch -c $@
 
 %.fst-in:
 	@echo $(FSTAR_FLAGS) --max_fuel 0 --max_ifuel 0
@@ -32,3 +34,5 @@ extract-tailcalls:
 
 clean:
 	rm -rf *.c *.h *~ *.checked *.checked.lax *.krml .depend out
+
+all-time: mkdir all

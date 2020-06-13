@@ -7,7 +7,17 @@ include $(FSTAR_HOME)/ulib/gmake/z3.mk
 include $(FSTAR_HOME)/ulib/gmake/fstar.mk
 
 #332 -> `abstract` keyword is fatal error
-OTHERFLAGS+=--warn_error @332
+OTHERFLAGS+=--warn_error -332
+OTHERFLAGS+=--warn_error -241 # Unable to load XX
+OTHERFLAGS+=--warn_error -242 # Definitions of inner let-rec aux and its enclosing top-level letbinding are not encoded to the solver, you will only be able to reason with their types
+OTHERFLAGS+=--warn_error -247 # XX.checked does not exist
+OTHERFLAGS+=--warn_error -252 # (Hint-replay failed): assertion failed
+OTHERFLAGS+=--warn_error -271 # Pattern uses these theory symbols or terms that should not be in an smt pattern
+OTHERFLAGS+=--warn_error -285 # No modules in namespace DLL and no file with that name either
+OTHERFLAGS+=--warn_error -288 # XX is deprecated
+OTHERFLAGS+=--warn_error -321 # Did not expect XX to be already checked, but found it in an unexpected location XX
+OTHERFLAGS+=--warn_error -328 # Global binding XX is recursive but not used in its body
+OTHERFLAGS+=--warn_error -333 # Unable to open hints file: XX; ran without hints
 
 
 ifeq ($(OS),Windows_NT)
@@ -24,3 +34,10 @@ endif
 
 %.fail-uver: %.fst
 	(! $(FSTAR) $^ >/dev/null 2>&1) || (echo "NEGATIVE TEST FAILED ($@)!" ; false)
+
+mkdir:
+	@mkdir -p ./Logs
+%.uver-time: %.fst
+	@d=$$(date +%s) \
+	; $(Q)$(BENCHMARK_PRE) $(FSTAR) --query_stats $^ > Logs/$^.trace \
+	&& echo "$^,	$$(($$(date +%s)-d))"

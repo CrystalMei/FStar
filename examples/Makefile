@@ -57,3 +57,32 @@ clean:
 
 wc:
 	find . -name "*.fst" | grep -v -e to_be_ported | xargs sloccount
+
+BENCH_EG=\
+algorithms \
+bytes \
+calc \
+csl \
+dm4free \
+doublylinkedlist \
+generic \
+indexed_effects \
+low-mitls-experiments \
+maths \
+metatheory \
+preorders \
+printf \
+regional \
+rel \
+seplogic \
+software_foundations \
+termination \
+typeclasses \
+verifythis \
+crypto
+# demos
+
+all-time: $(addsuffix .all-time, $(BENCH_EG))
+%.all-time: %
+	@echo "[$^]"
+	@+$(MAKE) -C $^ all-time

@@ -29,3 +29,8 @@ clean:
 	rm -f .depend
 	rm -rf _cache
 	rm -rf _output
+
+mkdir:
+	@mkdir -p ./_cache
+	@mkdir -p ./Logs
+all-time: clean mkdir verify-all

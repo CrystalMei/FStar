@@ -15,3 +15,8 @@ verify-all: $(CACHE_DIR) $(addsuffix .checked, $(addprefix $(CACHE_DIR)/, $(FSTA
 
 %.fst-in:
 	@echo $(OTHERFLAGS) $(HINTS_EMNABLED) $(addprefix --include , $(INCLUDE_PATHS))
+
+mkdir:
+	@mkdir -p ./Logs
+	@mkdir -p $(CACHE_DIR)
+all-time: clean mkdir verify-all

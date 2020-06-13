@@ -28,7 +28,17 @@ OUTPUT_DIRECTORY ?= _output
 CACHE_DIR ?= _cache
 
 # Additionaly flags to pass to F*, 332 -> abstract usage
-OTHERFLAGS += --use_hints --warn_error @332
+OTHERFLAGS += --use_hints --warn_error -332
+OTHERFLAGS+=--warn_error -241 # Unable to load XX
+OTHERFLAGS+=--warn_error -242 # Definitions of inner let-rec aux and its enclosing top-level letbinding are not encoded to the solver, you will only be able to reason with their types
+OTHERFLAGS+=--warn_error -247 # XX.checked does not exist
+OTHERFLAGS+=--warn_error -252 # (Hint-replay failed): assertion failed
+OTHERFLAGS+=--warn_error -271 # Pattern uses these theory symbols or terms that should not be in an smt pattern
+OTHERFLAGS+=--warn_error -285 # No modules in namespace DLL and no file with that name either
+OTHERFLAGS+=--warn_error -288 # XX is deprecated
+OTHERFLAGS+=--warn_error -321 # Did not expect XX to be already checked, but found it in an unexpected location XX
+OTHERFLAGS+=--warn_error -328 # Global binding XX is recursive but not used in its body
+OTHERFLAGS+=--warn_error -333 # Unable to open hints file: XX; ran without hints
 
 # Set ADMIT=1 to admit queries
 ADMIT ?=
@@ -70,15 +80,19 @@ include .depend
 
 # a.fst.checked is the binary, checked version of a.fst
 %.fst.checked:
-	@echo "[CHECK     $(basename $(notdir $@))]"
-	$(Q)$(MY_FSTAR) $<
-	@touch -c $@
+# @echo "[CHECK     $(basename $(notdir $@))]"
+	@d=$$(date +%s) \
+	; $(MY_FSTAR) --query_stats $< > Logs/$(basename $(notdir $@)).trace \
+	&& echo "$(basename $(notdir $@)),	$$(($$(date +%s)-d))" \
+	&& touch -c $@
 
 # a.fsti.checked is the binary, checked version of a.fsti
 %.fsti.checked:
-	@echo "[CHECK     $(basename $(notdir $@))]"
-	$(Q)$(MY_FSTAR) $<
-	@touch -c $@
+# @echo "[CHECK     $(basename $(notdir $@))]"
+	@d=$$(date +%s) \
+	; $(MY_FSTAR) --query_stats $< > Logs/$(basename $(notdir $@)).trace \
+	&& echo "$(basename $(notdir $@)),	$$(($$(date +%s)-d))" \
+	&& touch -c $@
 
 %.fst.output: %.fst
 	@echo "[OUTPUT    $(basename $(notdir $@))]"

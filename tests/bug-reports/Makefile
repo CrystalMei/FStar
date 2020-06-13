@@ -4,6 +4,7 @@ include $(FSTAR_HOME)/ulib/ml/Makefile.include
 
 all: verify iverify not-verify extract
 
+all-time: mkdir verify iverify not-verify
 ##################
 # Positive tests #
 ##################
@@ -125,7 +126,9 @@ CAPPED=$(subst Bug,Bug,$*)
 
 
 %.verify: %.fst
-	$(FSTAR) $^
+	@d=$$(date +%s) \
+	; $(FSTAR) $^ --query_stats > Logs/$^.trace \
+	&& echo "$^,	$$(($$(date +%s)-d))"
 
 Bug1383.verify: OTHERFLAGS += --warn_error @275 #Z3 warnings are fatal
 Bug1694.verify: OTHERFLAGS += --codegen OCaml
@@ -134,7 +137,9 @@ Bug1694.verify: OTHERFLAGS += --codegen OCaml
 verify: $(subst .fst,.verify,$(SHOULD_VERIFY_CLOSED))
 
 %.iverify: %.fsti
-	$(FSTAR) $^
+	@d=$$(date +%s) \
+	; $(FSTAR) $^ --query_stats > Logs/$^.trace \
+	&& echo "$^,	$$(($$(date +%s)-d))"
 
 iverify: $(subst .fsti,.iverify,$(SHOULD_VERIFY_INTERFACE_CLOSED))
 
@@ -142,7 +147,9 @@ verify-maybe-close: $(subst .fst,.verify,$(SHOULD_VERIFY_MAYBE_CLOSE))
 
 
 %.not-verify: %.fst
-	(! $(FSTAR) $^ >/dev/null 2>&1) || (echo "Negative test failed ($@)!" ; false)
+	@d=$$(date +%s) \
+	; (! $(FSTAR) $^ >/dev/null 2>&1) || (echo "Negative test failed ($@)!" ; false) \
+	&& echo "$^,	$$(($$(date +%s)-d))"
 
 not-verify: $(subst .fst,.not-verify,$(SHOULD_NOT_VERIFY_CLOSED))
 

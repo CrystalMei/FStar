@@ -10,3 +10,8 @@ $(CACHE_DIR):
 include ../Makefile.common
 
 verify-all: $(CACHE_DIR) $(addsuffix .checked, $(addprefix $(CACHE_DIR)/, $(FSTAR_FILES)))
+
+mkdir:
+	@mkdir -p ./Logs
+	@mkdir -p $(CACHE_DIR)
+all-time: clean mkdir verify-all

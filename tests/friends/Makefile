@@ -11,3 +11,8 @@ include $(FSTAR_HOME)/examples/Makefile.include
 
 %.clean: %
 	+$(MAKE) -C $* clean
+
+
+all-time: $(addsuffix .all-time, $(DIRS))
+%.all-time: %
+	+$(MAKE) -C $* all-time

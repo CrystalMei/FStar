@@ -16,3 +16,12 @@ SL.ExamplesAuto.custom: OTHERFLAGS+=--cache_off
 
 %.fst-in:
 	@echo $(OTHERFLAGS)
+
+all-time: mkdir SepLogic.Heap.uver-time Shallow.uver-time SL.Heap.uver-time SL.Effect.uver-time	\
+	SL.Shallow.uver-time Examples.uver-time \
+	SL.ExamplesAuto.custom-time
+
+%.custom-time: %.fst
+	@d=$$(date +%s) \
+	; $(FSTAR) --use_extracted_interfaces true --query_stats $^ > Logs/$^.trace \
+	&& echo "$^,	$$(($$(date +%s)-d))"

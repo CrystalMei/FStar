@@ -13,3 +13,6 @@ MRefHeap.uver : MRefHeap.fst
 # Targets to get F* arguments in interactive mode
 %.fst-in: 
 	@echo $(OTHERFLAGS) $(HINTS_ENABLED)
+
+all-time: mkdir uall-time
+uall-time: $(patsubst %.fst,%.uver-time,$(wildcard *.fst))

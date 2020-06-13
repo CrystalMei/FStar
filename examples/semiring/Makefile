@@ -27,3 +27,5 @@ all: CanonCommSemiring.interpreted CanonCommSemiring.native
 
 clean:
 	rm -f *.checked *.ml *.o *.cm[ix] *.cmxs *~
+
+all-time: CanonCommSemiring.interpreted CanonCommSemiring.native

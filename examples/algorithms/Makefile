@@ -6,6 +6,9 @@ all: uall
 
 uall: BinarySearch.uver IntSort.uver InsertionSort.uver MergeSort.uver QuickSort.List.uver QuickSort.Seq.uver GC.uver Unification.uver Huffman.uver QuickSort.Array.uver #downgrade  //TODO
 
+all-time: mkdir uall-time
+uall-time: BinarySearch.uver-time IntSort.uver-time InsertionSort.uver-time MergeSort.uver-time QuickSort.List.uver-time QuickSort.Seq.uver-time GC.uver-time Unification.uver-time Huffman.uver-time QuickSort.Array.uver-time
+
 downgrade: QuickSort.Array.fst downgrade.fst
 	$(FSTAR) --include $(FSTAR_HOME)/ulib/reclaimable downgrade.fst
 

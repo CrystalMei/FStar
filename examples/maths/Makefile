@@ -6,3 +6,5 @@ all: uall
 
 uall: Gcd.uver
 
+all-time: mkdir uall-time
+uall-time: Gcd.uver-time

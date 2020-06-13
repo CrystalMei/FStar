@@ -34,9 +34,16 @@ cache/
 examples/*/*.ml
 examples/crypto/CntProtocol.exe
 examples/wysteria/ocaml-output/*
+examples/*/Logs
+examples/*/*/Logs
+examples/*.log
 
 tests/*/*.ml
 tests/incl/*.neg/error.log
+tests/*/Logs
+tests/*/*/Logs
+tests/*.log
+tests/*/*.log
 
 _build/
 /ulib/ml/_taclib_build/

@@ -11,10 +11,14 @@ verify-all: $(ALL_CHECKED_FILES)
 	$(FSTAR) --dep full $(wildcard *.fst *.fsti) > .depend
 
 %.checked:
-	$(FSTAR) --cache_checked_modules $<
-	touch -c $@
+	@d=$$(date +%s) \
+	; $(FSTAR) --cache_checked_modules $< --query_stats > Logs/$<.trace \
+	&& echo "$<,	$$(($$(date +%s)-d))" \
+	&& touch -c $@
 
 clean:
 	rm -f .depend *.checked
 
 depend: .depend
+
+all-time: clean mkdir verify-all

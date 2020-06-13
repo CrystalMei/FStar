@@ -19,3 +19,8 @@ native_bench2:
 	rm -f FStar_Tactics_Typeclasses.*
 	$(FSTAR) $(FSTAR_HOME)/ulib/FStar.Tactics.Typeclasses.fst --extract FStar.Tactics.Typeclasses --codegen Plugin
 	$(FSTAR) Big.fst --timing --load FStar.Tactics.Typeclasses
+
+mkdir:
+	@mkdir -p ./Logs
+	@mkdir -p $(CACHE_DIR)
+all-time: clean mkdir verify-all

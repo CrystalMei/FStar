@@ -24,3 +24,15 @@ clean: $(addsuffix .clean, $(ALL_TEST_DIRS))
 
 %.clean: %
 	+$(MAKE) -C $^ clean
+
+BENCH_EG=\
+struct \
+tactics # problem
+
+# bug-reports \
+# friends \
+# micro-benchmarks \ # problem
+
+all-time: $(addsuffix .all-time, $(BENCH_EG))
+%.all-time: %
+	+$(MAKE) -C $^ all-time
